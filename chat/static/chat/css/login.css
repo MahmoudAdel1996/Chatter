@@ -1,0 +1,64 @@
+body{
+	background: url('../images/mountain.jpg') center center fixed;
+	background-size: cover;
+}
+
+.main-section{
+	padding: 0;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 300px
+
+}
+.modal-content{
+	background: #3b4652;
+	opacity: 0.95;
+	padding: 0 18px;
+	box-shadow: 0px 0px 3px #848484
+}
+.user-img{
+	position: relative;
+	top: -50px;
+}
+.user-img img{
+	border-radius: 5px;
+	box-shadow: 0px 0px 2px #3b4652
+}
+.form-group{
+	margin-bottom: 20px;
+}
+
+i.user,
+i.pass{
+	position: relative;
+	top: -26px;
+	left: 14px;
+	color: #555e60
+
+}
+.btn{
+	background-color: #22BFA1;
+	color: #fff;
+	border-bottom: 3px solid #219882
+}
+.btn:focus , .btn:hover{
+	background: #25a890;
+	border-bottom: 3px solid #25a890;
+}
+i.send{
+	padding-right: 2px;
+}
+.textinput{
+	padding-left: 35px;
+}
+.pad{
+	margin-bottom: 35px;
+}
+.logout{
+	position: fixed;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%,0)
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+{%load static%}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat | Room</title>
+    <link rel="icon" href="{% static 'chat/images/icon.png' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'chat/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'chat/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'chat/css/chat.css' %}">
+</head>
+<body>
+
+    <header class="header-area">
+        <img class="pull-left" src="{% static 'chat/images/logo.png' %}" alt="Logo">
+        <a class="pull-right btn btn-danger logout" onclick="window.location=`{% url 'logout' %}`">logout</a>
+    </header>
+    <div class="content-area">
+        <div class="container">
+            <div class="content clearfix">
+                <div class=" float-left content-left">
+                    {% for room in rooms %}
+                        <div class="row user">
+                            <img class="col-2 img-thumbnail user-photo " src="{% static 'chat/images/face.png' %}" alt="User Photo">
+                            <div class="col-8 username">
+                                <h5>{{room.botname}}</h5>
+                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</small>
+                            </div>
+                            <small class="col-1 date">5<i>sec</i></small>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class=" float-right content-right">
+                    <h5 id="username" class="text-center">medical</h5>
+                    <div class="user-name" style="display:none">{{user}}</div>
+                    <div class="chat">
+                    <div class="chat-area">
+                    
+                    
+                    {% for message in messages %}
+                        {% if message.chatroom_id.botname == 'medical' %}
+                            <div class="{% if request.user == message.user_id %}me{% else %}bot{% endif %}">
+                                <i class="{% if request.user == message.user_id %}fa fa-caret-left{% else %}fa fa-caret-right{% endif %}"></i>
+                                <span>{{message.user_id}} : </span>
+                                {{message.message}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                    </div>
+                    <form class="row" method="post">
+                        <textarea id="id_message" placeholder="Your Message" class=" col-11 form-control" name="message" rows="1"></textarea>
+                        <button type="submit" class="col-1 send"><i class="fa fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'chat/js/jquery-3.3.1.min.js' %} "></script>
+    <script src="{% static 'chat/js/bootstrap.min.js' %} "></script>
+    <script src="{% static 'chat/js/fontawesome.min.js' %} "></script>
+    <script src="{% static 'chat/js/jquery.nicescroll.min.js' %} "></script>
+    <script src="{% static 'chat/js/chat.js' %}"></script>
+    <script>
+        var csrf_token = '{{csrf_token}}';
+    </script>
+</body>
+</html>

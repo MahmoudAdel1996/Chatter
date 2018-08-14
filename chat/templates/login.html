@@ -1,0 +1,49 @@
+<!Doctype html>
+{% load static %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Chat with our report for more inf">
+ 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Login | Chatter</title>
+		<link rel="icon" href="{% static 'chat/images/icon.png' %}" type="image/x-icon">      
+		<link rel="stylesheet" href="{% static 'chat/css/font-awesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'chat/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'chat/css/login.css' %}">
+	</head>
+	<body>
+		 {% if error %} 
+			<div class="alert alert-danger logout" role="alert">
+				username or password is wrong! please try again.
+			</div>
+		 {% endif %}
+		{% block alert %}
+		{% endblock alert %}
+		<div class=" modal-dialog text-center">
+			<div class="col-8 main-section">
+				<div class="modal-content">
+					<div class="col-12 user-img">
+						<img width="100px" src="{% static 'chat/images/face.png' %}" alt="userImage">
+					</div>
+					<form action="{% url 'chatview' %}" class="col-12" method="POST">{% csrf_token %}
+						<div class="form-group clearfix">
+							<input type="text" class="form-control textinput" placeholder="UserName" name="username">
+							<i class="fa fa-user pull-left user"></i>
+						</div>
+						<div class="form-group clearfix">
+							<input type="password" class="form-control textinput" placeholder="Password" name="password">
+							<i class="fa fa-lock pull-left pass"></i>
+						</div>
+						<div class="text-center pad">
+							<button type="submit" class="btn"><i class="fa fa-paper-plane send"></i> Login</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script src="{% static 'chat/js/jquery-3.3.1.min.js' %} "></script>
+		<script src="{% static 'chat/js/bootstrap.min.js' %} "></script>
+		<script src="{% static 'chat/js/fontawesome.min.js' %} "></script>
+	</body>
+</html>
