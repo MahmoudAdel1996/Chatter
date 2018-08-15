@@ -35,18 +35,15 @@ $(document).ready(function () {
     function getdata(){
         $('.chat').load(document.URL + ' .chat-area');
     }
-    setInterval(getdata, 1000);
-    
-    
-
+    setInterval(getdata, 10000);
+    $('.chat').scrollTop($('.chat').height());
     function ajaxfunc() {
-      var message = $('textarea').val();
       $.ajax({
           method: 'POST',
           url: '/AddMessage',
           datatype:'json',
           data:{
-              'message': message,
+              'message': $('textarea').val(),
               'botname': $('#username').html(),
               'username': $('.user-name').html(),
           },
@@ -56,6 +53,7 @@ $(document).ready(function () {
           success: function(data) {
             var msg = (data.message).replace(/\>/g, '&gt;').replace(/\</g, '&lt;');
             $('.chat-area').append('<div class="me"><i class="fa fa-caret-left"></i><span>' + data.username + ' : ' + '</span>' + msg + '</div>');
+            $('.chat').scrollTop($('.chat').height());
           }
       });
     };
@@ -70,7 +68,6 @@ $(document).ready(function () {
             ajaxfunc();
             //$('.chat-area').append('<div class="me"><i class="fa fa-caret-left"></i><span>' + $('.user-name').html() + ' : ' + '</span>' + msg + '</div>');
             $('textarea').val('');
-            $('.chat-area').scrollTop($('.chat-area').height());
             return false;
             
         }
@@ -87,7 +84,6 @@ $(document).ready(function () {
         if (msg != '') {
             ajaxfunc();
             $('textarea').val('');
-            $('.chat-area').scrollTop($('.chat-area').height());
         }
     });
 
