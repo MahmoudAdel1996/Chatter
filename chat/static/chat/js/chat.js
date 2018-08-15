@@ -25,17 +25,21 @@ $(document).ready(function () {
         scrollspeed: '200',
     });
     
+    $('.children').css('display', 'none');
     
     $('.user').click(function () {
         $('.user').removeClass('active');
         $(this).addClass('active');
         $('#username').html($(this).find('h5').html());
+        $('.chat-area').children().css('display', 'none');
+        $('.' + $(this).find('h5').html()).css('display', 'block');
     });
-    
-    function getdata(){
+
+    function getdata() {
         $('.chat').load(document.URL + ' .chat-area');
     }
-    setInterval(getdata, 10000);
+    //setInterval(getdata, 10000);
+
     $('.chat').scrollTop($('.chat').height());
     function ajaxfunc() {
       $.ajax({
@@ -66,7 +70,6 @@ $(document).ready(function () {
             if (keyCode.preventDefault)
                 keyCode.preventDefault();
             ajaxfunc();
-            //$('.chat-area').append('<div class="me"><i class="fa fa-caret-left"></i><span>' + $('.user-name').html() + ' : ' + '</span>' + msg + '</div>');
             $('textarea').val('');
             return false;
             

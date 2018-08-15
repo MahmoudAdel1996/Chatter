@@ -51,11 +51,11 @@ def AddMessage(request):
             'botname':botname,
             'username':username,
         }
-        """ Message.objects.create(
+        Message.objects.create(
             chatroom_id_id=Chatroom.objects.get(botname=botname).id,
             user_id=request.user,
             message=message,
-        ) """
+        )
         return JsonResponse(context)
     else:
         msg = serializers.serialize('json', Message.objects.all())
