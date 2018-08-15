@@ -1,0 +1,18 @@
+<div class="medical">
+    {% for message in messages %} {% if message.chatroom_id.botname == 'medical' %}
+    <div class="{% if request.user == message.user_id %}me{% else %}bot{% endif %}">
+        <i class="{% if request.user == message.user_id %}fa fa-caret-left{% else %}fa fa-caret-right{% endif %}"></i>
+        <span>{{message.user_id}} : </span>
+        {{message.message}}
+    </div>
+    {% endif %} {% endfor %}
+</div>
+<div class="children">
+    {% for message in messages %} {% if message.chatroom_id.botname == 'children' %}
+    <div class="{% if request.user == message.user_id %}me{% else %}bot{% endif %}">
+        <i class="{% if request.user == message.user_id %}fa fa-caret-left{% else %}fa fa-caret-right{% endif %}"></i>
+        <span>{{message.user_id}} : </span>
+        {{message.message}}
+    </div>
+    {% endif %} {% endfor %}
+</div>

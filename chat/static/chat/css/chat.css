@@ -101,16 +101,11 @@ body{
     color: #fff;
 
 }
-.content-area .container .content-right .chat-area{
+.content-area .container .content-right .chat-area .inner{
     height: 72.5vh;
     padding: 20px;
-    overflow: hidden;
-}
-
-.content-area .container .content-right .chat-area:hover{
     overflow: auto;
 }
-
 .content-area .container .content-right .chat-area .me{
     color: #fff;
     background-color: #067e7e;

@@ -1,32 +1,11 @@
 $(document).ready(function () {
-    $('html').niceScroll({
-        cursorcolor: '#067e7e',
-        cursorborder: 'none',
-        cursorborderradius: '2px',
-        scrollspeed: '200'
-    });
-    $('.chat-area').niceScroll({
-        cursorcolor: '#067e7e' ,
-        cursorborder: 'none',
-        cursorborderradius: '2px',
-        scrollspeed:'100'
-    });
-    $('.content-left').niceScroll({
-        cursorcolor: '#067e7e',
-        cursorborder: 'none',
-        cursorborderradius: '2px',
-        scrollspeed: '200'
+    $('.chat-area').children().addClass('inner');
+    $('.chat-area').children().css('display', 'none');
+    $('.chat-area').children().first().css('display', 'block');
+    $('.content-left .user').first().addClass('active');
+    $('.inner').scrollTop(99999);
+    
 
-    });
-    $('textarea').niceScroll({
-        cursorcolor: '#067e7e',
-        cursorborder: 'none',
-        cursorborderradius: '2px',
-        scrollspeed: '200',
-    });
-    
-    $('.children').css('display', 'none');
-    
     $('.user').click(function () {
         $('.user').removeClass('active');
         $(this).addClass('active');
@@ -38,9 +17,8 @@ $(document).ready(function () {
     function getdata() {
         $('.chat').load(document.URL + ' .chat-area');
     }
-    //setInterval(getdata, 10000);
+    //setInterval(getdata, 1000);
 
-    $('.chat').scrollTop($('.chat').height());
     function ajaxfunc() {
       $.ajax({
           method: 'POST',
@@ -56,8 +34,8 @@ $(document).ready(function () {
           },
           success: function(data) {
             var msg = (data.message).replace(/\>/g, '&gt;').replace(/\</g, '&lt;');
-            $('.chat-area').append('<div class="me"><i class="fa fa-caret-left"></i><span>' + data.username + ' : ' + '</span>' + msg + '</div>');
-            $('.chat').scrollTop($('.chat').height());
+              $('.chat-area .' + $('#username').html()).append('<div class="me"><i class="fa fa-caret-left"></i><span>' + data.username + ' : ' + '</span>' + msg + '</div>');
+              $('.inner').scrollTop(99999);
           }
       });
     };
@@ -90,8 +68,32 @@ $(document).ready(function () {
         }
     });
 
-    $('.content-left .user').first().addClass('active');
+    
+    
+    $('html').niceScroll({
+        cursorcolor: '#067e7e',
+        cursorborder: 'none',
+        cursorborderradius: '2px',
+        scrollspeed: '200'
+    });
+    $('.inner').niceScroll({
+        cursorcolor: '#067e7e',
+        cursorborder: 'none',
+        cursorborderradius: '2px',
+        scrollspeed: '100'
+    });
+    $('.content-left').niceScroll({
+        cursorcolor: '#067e7e',
+        cursorborder: 'none',
+        cursorborderradius: '2px',
+        scrollspeed: '200'
 
-
-
+    });
+    $('textarea').niceScroll({
+        cursorcolor: '#067e7e',
+        cursorborder: 'none',
+        cursorborderradius: '2px',
+        scrollspeed: '200',
+    });
+    
 });
