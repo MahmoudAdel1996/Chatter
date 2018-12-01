@@ -8,8 +8,12 @@ from .models import Message, Chatroom
 #from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
+
 def login_view(request):
-    return render(request, 'login.html')
+    if not is_authenticated(request.user):
+        return render(request, 'login.html')
+    else:
+        return redirect(chatview)
 
 
 def logout_view(request):
@@ -21,6 +25,7 @@ def is_authenticated(user):
     if callable(user.is_authenticated):
         return user.is_authenticated()
     return user.is_authenticated
+
 
 def chatview(request):
     messages = Message.objects.all()
@@ -41,7 +46,8 @@ def chatview(request):
     else:
         return render(request, 'chat.html', {'messages': messages, 'rooms': rooms})
 
-def AddMessage(request):
+
+def add_message(request):
     if request.method == 'POST':
         message = request.POST.get('message', None)
         botname = request.POST.get('botname', None)

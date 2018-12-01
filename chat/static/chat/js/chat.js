@@ -5,7 +5,7 @@ $(document).ready(function () {
     $('.content-left .user').first().addClass('active');
     $('.inner').scrollTop(99999);
     
-
+    
     $('.user').click(function () {
         $('.user').removeClass('active');
         $(this).addClass('active');
@@ -14,11 +14,28 @@ $(document).ready(function () {
         $('.' + $(this).find('h5').html()).css('display', 'block');
     });
 
-    function getdata() {
-        $('.chat').load(document.URL + ' .chat-area');
-    }
-    //setInterval(getdata, 1000);
+    /* function getdata() {
+        $.ajax({
+            method: 'GET',
+            url: '/AddMessage',
+            datatype: 'json',
+            success: function (data) {
+                var object = $.parseJSON(data);
+                $.each(object, function (index, val) {
+                    if (val.fields.chatroom_id=1) {
+                        //$('.medical').append('')
+                    } else {
+                        $('.children').append('')
+                    }
 
+                });
+            }
+        });
+    }; */
+    //setInterval(getdata, 1000);
+    //getdata();
+
+    // send message to backend
     function ajaxfunc() {
       $.ajax({
           method: 'POST',
@@ -41,6 +58,7 @@ $(document).ready(function () {
     };
 
 
+    //send message to backend when click enter
     $('textarea').keydown(function (event) {
         var msg = $('textarea').val();
         var keyCode = (event.keyCode ? event.keyCode : event.which);
@@ -59,6 +77,7 @@ $(document).ready(function () {
         }
     });
 
+    //send message to backend when btn is clicked
     $('.send').click(function (e) {
         e.preventDefault();
         var msg = $('textarea').val()
